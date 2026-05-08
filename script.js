@@ -177,4 +177,46 @@ function continueGuest(){
 document.getElementById("register-modal").style.display="none";
 
 }
+let discount = 0;
 
+function removeItem(index){
+
+cart.splice(index,1);
+
+renderCart();
+
+}
+
+function applyCoupon(){
+
+const code =
+document.getElementById('couponInput')
+.value.toUpperCase();
+
+if(code === 'REVN10'){
+
+discount = 10;
+
+localStorage.setItem('revnCoupon',10);
+
+}
+else if(code === 'REVN5'){
+
+discount = 5;
+
+localStorage.setItem('revnCoupon',5);
+
+}
+else{
+
+discount = 0;
+
+localStorage.removeItem('revnCoupon');
+
+alert('Cupón inválido');
+
+}
+
+renderCart();
+
+}
