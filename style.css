@@ -1,180 +1,100 @@
-const products=[
-{name:"POLERA OVERSIZE BASIC STREETWEAR REVOLUTION NEGRA",price:21990,images:["activos/basic-front.jpg","activos/basic-back.jpg"]},
-{name:"POLERA OVERSIZE LOST TEDDY STREETWEAR REVOLUTION NEGRA",price:21990,images:["activos/teddy-front.jpg","activos/teddy-back.jpg"]},
-{name:"POLERA OVERSIZE LOST DICE STREETWEAR REVOLUTION NEGRA",price:25990,images:["activos/dice-front.jpg","activos/dice-back.jpg"]},
-{name:"POLERA OVERSIZE REBIRTH STREETWEAR REVOLUTION NEGRA",price:25990,images:["activos/rebirth-front.jpg","activos/rebirth-back.jpg"]}
-];
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;scroll-behavior:smooth}
+body{background:#050505;color:white}
+.topbar{padding:10px;text-align:center;border-bottom:1px solid #222;font-size:12px;letter-spacing:3px}
+header{display:flex;justify-content:space-between;align-items:center;padding:25px 50px;border-bottom:1px solid #222;position:sticky;top:0;background:#050505;z-index:1000}
+.logo{text-decoration:none;color:white;font-size:42px;font-weight:bold}
+nav{display:flex;gap:30px}
+nav a{color:white;text-decoration:none}
+.hero{height:90vh;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center}
+.hero h1{font-size:120px}
+.hero p{letter-spacing:5px;color:#aaa;margin-top:10px}
+.hero a{margin-top:30px;padding:16px 50px;border:1px solid white;color:white;text-decoration:none}
+.products{padding:60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+.card{background:#111;border:1px solid #222;overflow:hidden}
+.card img{width:100%;height:420px;object-fit:cover}
+.content{padding:20px}
+.content h2{font-size:18px}
+.price{margin:20px 0;font-size:26px}
+.content button,.actions button,.cart button,.popup button{width:100%;padding:15px;background:black;color:white;border:1px solid white;cursor:pointer}
+.about,.contact{padding:80px 60px}
+.about h2,.contact h2{font-size:50px;margin-bottom:30px}
+.about p{line-height:1.8;color:#bbb;max-width:700px}
+.socials{display:flex;gap:20px}
+.socials a{padding:15px 25px;border:1px solid white;color:white;text-decoration:none}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.94);justify-content:center;align-items:flex-start;overflow:auto;padding-top:40px;z-index:3000}
+.modal-box{background:#111;width:90%;max-width:1200px;display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:40px;position:relative}
+.close{position:absolute;right:20px;top:10px;font-size:40px;cursor:pointer}
+.slider{position:relative}
+.slider img{width:100%;height:700px;object-fit:cover}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.7);border:none;color:white;padding:15px;font-size:24px;cursor:pointer;opacity:0;transition:.3s}
+.slider:hover .arrow{opacity:1}
+.left{left:10px}.right{right:10px}
+.features{list-style:none;line-height:2;margin:25px 0;color:#ddd}
+.sizes{display:flex;gap:10px;margin:25px 0}
+.sizes button{padding:12px 18px;background:black;color:white;border:1px solid white;cursor:pointer}
+.sizes button.active{background:white;color:black}
+.actions{display:flex;flex-direction:column;gap:15px}
+.recommended{margin-top:40px}
+.recommended-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.recommended-grid img{width:100%;height:120px;object-fit:cover;cursor:pointer}
+.cart{position:fixed;right:-400px;top:0;width:400px;height:100%;background:#111;padding:30px;transition:.4s;overflow:auto;border-left:1px solid #222;z-index:4000}
+.cart.open{right:0}
+.cart-item{padding:15px 0;border-bottom:1px solid #333}
+.total{margin:30px 0;font-size:24px}
+.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:flex;justify-content:center;align-items:center;z-index:9999}
+.popup{background:#111;padding:40px;width:90%;max-width:420px;text-align:center;border:1px solid #222}
+.popup h2{margin-bottom:20px}
+.popup input{width:100%;padding:15px;background:black;border:1px solid #333;color:white;margin:20px 0}
+.wheel{width:260px;height:260px;border-radius:50%;border:6px solid white;margin:25px auto;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;transition:4s cubic-bezier(.17,.67,.24,1)}
+.wheel div{width:50%;text-align:center;font-weight:bold}
+.hidden{display:none}
+@media(max-width:900px){.modal-box{grid-template-columns:1fr}header{flex-direction:column;gap:20px;padding:20px}.hero h1{font-size:70px}}
 
-const productsDiv=document.getElementById("productos");
 
-products.forEach((p,index)=>{
-productsDiv.innerHTML+=`
-<div class='card'>
-<img src='${p.images[0]}'>
-<div class='content'>
-<h2>${p.name}</h2>
-<div class='price'>$${p.price.toLocaleString("es-CL")}</div>
-<button onclick='openProduct(${index})'>VER</button>
-</div>
-</div>`;
-});
+/* LOGIN + RULETA PRO */
 
-let currentProduct=null;
-let currentSlide=0;
-let selectedSize="M";
-
-function openProduct(index){
-currentProduct=products[index];
-currentSlide=0;
-document.getElementById("modal").style.display="flex";
-document.getElementById("title").innerText=currentProduct.name;
-document.getElementById("price").innerText="$"+currentProduct.price.toLocaleString("es-CL");
-updateSlide();
-renderRecommended(index);
+.pointer{
+position:absolute;
+top:-20px;
+left:50%;
+transform:translateX(-50%);
+font-size:40px;
+z-index:10;
 }
 
-function renderRecommended(currentIndex){
-const grid=document.getElementById("recommended-grid");
-grid.innerHTML="";
-products.forEach((p,i)=>{
-if(i!==currentIndex){
-grid.innerHTML+=`<img src='${p.images[0]}' onclick='openProduct(${i})'>`;
-}
-});
+.wheel-wrapper{
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:30px 0;
 }
 
-function closeModal(){document.getElementById("modal").style.display="none";}
-function updateSlide(){document.getElementById("slider-img").src=currentProduct.images[currentSlide];}
-function nextSlide(){currentSlide=(currentSlide+1)%currentProduct.images.length;updateSlide();}
-function prevSlide(){currentSlide=(currentSlide-1+currentProduct.images.length)%currentProduct.images.length;updateSlide();}
-
-function selectSize(btn){
-document.querySelectorAll(".sizes button").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-selectedSize=btn.innerText;
+.wheel{
+background:conic-gradient(
+#fff 0deg 90deg,
+#000 90deg 180deg,
+#fff 180deg 270deg,
+#000 270deg 360deg
+);
+overflow:hidden;
+position:relative;
+box-shadow:0 0 30px rgba(255,255,255,.15);
 }
 
-let cart=[];
-
-function addToCart(){
-cart.push({name:currentProduct.name,price:currentProduct.price,size:selectedSize});
-renderCart();
+.wheel div{
+color:white;
+font-size:18px;
+text-shadow:0 0 10px black;
 }
 
-function renderCart(){
-let total=0;
-const items=document.getElementById("cart-items");
-items.innerHTML="";
-cart.forEach(item=>{
-total+=item.price;
-items.innerHTML+=`
-<div class='cart-item'>
-<strong>${item.name}</strong><br>
-Talla: ${item.size}<br>
-$${item.price.toLocaleString("es-CL")}
-</div>`;
-});
-document.getElementById("total").innerText="$"+total.toLocaleString("es-CL");
-document.getElementById("cart-count").innerText=cart.length;
+.auth-switch{
+margin-top:15px;
+font-size:14px;
+color:#aaa;
+cursor:pointer;
 }
 
-function toggleCart(){
-document.getElementById("cart").classList.toggle("open");
+.auth-switch:hover{
+color:white;
 }
-
-function buyNow(){
-const msg=`Hola REVN quiero comprar:%0A%0A${currentProduct.name}%0ATalla: ${selectedSize}%0A$${currentProduct.price.toLocaleString("es-CL")}`;
-window.open(`https://wa.me/56942361269?text=${msg}`);
-}
-
-function checkout(){
-if(cart.length===0)return;
-let total=0;
-let msg="Hola REVN quiero comprar:%0A%0A";
-cart.forEach(item=>{
-total+=item.price;
-msg+=`- ${item.name} | Talla ${item.size} | $${item.price.toLocaleString("es-CL")}%0A`;
-});
-msg+=`%0ATOTAL: $${total.toLocaleString("es-CL")}`;
-window.open(`https://wa.me/56942361269?text=${msg}`);
-}
-
-function registerUser(){
-const email=document.getElementById("email").value;
-if(!email.includes("@")) return alert("Ingresa un correo válido");
-localStorage.setItem("revnUser",email);
-document.getElementById("register-modal").classList.add("hidden");
-document.getElementById("wheel-modal").classList.remove("hidden");
-}
-
-function spinWheel(){
-const wheel=document.getElementById("wheel");
-const random=Math.random()*100;
-let result="PERDISTE";
-let rotation=1440;
-
-if(random<=20){result="GANASTE 10%";rotation+=90;}
-else if(random<=50){result="GANASTE 5%";rotation+=180;}
-else{rotation+=270;}
-
-wheel.style.transform=`rotate(${rotation}deg)`;
-
-setTimeout(()=>{
-document.getElementById("result").innerText=result;
-},4000);
-}
-
-window.onload=()=>{
-if(localStorage.getItem("revnUser")){
-document.getElementById("register-modal").style.display="none";
-document.getElementById("wheel-modal").style.display="none";
-}
-}
-
-
-let users = JSON.parse(localStorage.getItem("revnUsers")) || [];
-
-function registerUser(){
-
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
-
-if(!email.includes("@") || password.length < 4){
-alert("Datos inválidos");
-return;
-}
-
-users.push({email,password});
-
-localStorage.setItem("revnUsers", JSON.stringify(users));
-localStorage.setItem("revnUser", email);
-
-document.getElementById("register-modal").classList.add("hidden");
-document.getElementById("wheel-modal").classList.remove("hidden");
-
-}
-
-function loginUser(){
-
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
-
-const found = users.find(u => u.email === email && u.password === password);
-
-if(!found){
-alert("Cuenta no encontrada");
-return;
-}
-
-localStorage.setItem("revnUser", email);
-
-document.getElementById("register-modal").style.display="none";
-
-}
-
-function continueGuest(){
-
-document.getElementById("register-modal").style.display="none";
-
-}
-
