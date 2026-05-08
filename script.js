@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>REVN</title>
+<link rel='stylesheet' href='style.css'>
+</head>
+<body>
+
+<div id='register-modal' class='overlay'>
+<div class='popup'>
+<h2>ÚNETE A REVN</h2>
+<p>Regístrate para desbloquear la ruleta.</p>
+<input type='email' id='email' placeholder='Tu correo'>
+<input type='password' id='password' placeholder='Contraseña'>
+<button onclick='registerUser()'>REGISTRARME + RULETA</button>
+<button style='margin-top:10px' onclick='loginUser()'>INICIAR SESIÓN</button>
+<div class='auth-switch' onclick='continueGuest()'>CONTINUAR COMO INVITADO</div>
+</div>
+</div>
+
+<div id='wheel-modal' class='overlay hidden'>
+<div class='popup'>
+<h2>RULETA REVN</h2>
+<div class='wheel-wrapper'>
+<div class='pointer'>▼</div>
+<div class='wheel' id='wheel'>
+<div>PERDISTE</div>
+<div>5%</div>
+<div>10%</div>
+<div>PERDISTE</div>
+</div>
+</div>
+<button onclick='spinWheel()'>GIRAR</button>
+<p id='result'></p>
+</div>
+</div>
+
+<div class='topbar'>ENVÍOS A TODO CHILE 🇨🇱</div>
+
+<header>
+<a href='#inicio' class='logo'>REVN</a>
+
+<nav>
+<a href='#productos'>PRODUCTOS</a>
+<a href='#nosotros'>NOSOTROS</a>
+<a href='#contacto'>CONTACTO</a>
+</nav>
+
+<div class='cart-btn' onclick='toggleCart()'>🛒 <span id='cart-count'>0</span></div>
+</header>
+
+<section class='hero' id='inicio'>
+<h1>REVN</h1>
+<p>STREETWEAR BUILT DIFFERENT</p>
+<a href='#productos'>COMPRAR</a>
+</section>
+
+<section class='products' id='productos'></section>
+
+<section class='about' id='nosotros'>
+<h2>NOSOTROS</h2>
+<p>
+Bienvenido a REVN.<br><br>
+Esto no es una prenda cualquiera.
+Es identidad. Mentalidad. Revolución.<br><br>
+Para los que crean su propio camino.
+Para los que no siguen al resto.
+Para los que van por más.
+</p>
+</section>
+
+<section class='contact' id='contacto'>
+<h2>REDES</h2>
+<div class='socials'>
+<a href='#'>INSTAGRAM</a>
+<a href='#'>TIKTOK</a>
+<a href='https://wa.me/56942361269'>WHATSAPP</a>
+</div>
+</section>
+
+<div class='modal' id='modal'>
+<div class='modal-box'>
+
+<span class='close' onclick='closeModal()'>×</span>
+
+<div class='slider'>
+<button class='arrow left' onclick='prevSlide()'>❮</button>
+<img id='slider-img'>
+<button class='arrow right' onclick='nextSlide()'>❯</button>
+</div>
+
+<div class='info'>
+<h2 id='title'></h2>
+<div class='price' id='price'></div>
+
+<p>
+Polera oversize 100% algodón premium.<br>
+Más de 300 gramos de calidad y resistencia.
+</p>
+
+<ul class='features'>
+<li>100% Algodón Premium</li>
+<li>Más de 300 gramos</li>
+<li>Calce Oversize</li>
+<li>Estampado de alta calidad</li>
+<li>Diseñada para durar</li>
+</ul>
+
+<div class='sizes'>
+<button onclick='selectSize(this)'>S</button>
+<button onclick='selectSize(this)'>M</button>
+<button onclick='selectSize(this)'>L</button>
+<button onclick='selectSize(this)'>XL</button>
+</div>
+
+<div class='actions'>
+<button onclick='addToCart()'>AGREGAR AL CARRO</button>
+<button onclick='buyNow()'>COMPRAR AHORA</button>
+</div>
+
+<div class='recommended'>
+<h3>TAMBIÉN TE PUEDE GUSTAR</h3>
+<div class='recommended-grid' id='recommended-grid'></div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class='cart' id='cart'>
+<h2>CARRITO</h2>
+<div id='cart-items'></div>
+<div class='total'>TOTAL: <span id='total'>$0</span></div>
+<button onclick='checkout()'>COMPRAR TODO</button>
+</div>
+
+<script src='script.js'></script>
+
+</body>
+</html>
