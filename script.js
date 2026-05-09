@@ -98,15 +98,6 @@ msg+=`- ${item.name} | Talla ${item.size} | $${item.price.toLocaleString("es-CL"
 msg+=`%0ATOTAL: $${total.toLocaleString("es-CL")}`;
 window.open(`https://wa.me/56942361269?text=${msg}`);
 }
-
-function registerUser(){
-const email=document.getElementById("email").value;
-if(!email.includes("@")) return alert("Ingresa un correo válido");
-localStorage.setItem("revnUser",email);
-document.getElementById("register-modal").classList.add("hidden");
-document.getElementById("wheel-modal").classList.remove("hidden");
-}
-
 function spinWheel(){
 const wheel=document.getElementById("wheel");
 const random=Math.random()*100;
