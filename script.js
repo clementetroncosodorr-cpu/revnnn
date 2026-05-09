@@ -220,3 +220,34 @@ alert('Cupón inválido');
 renderCart();
 
 }
+function closeCart(){
+
+document.getElementById(
+'cart'
+).classList.remove('open');
+
+}
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+renderCart();
+
+}
+
+function applyCoupon(){
+
+const code =
+document.getElementById(
+'couponInput'
+).value.toUpperCase();
+
+localStorage.setItem(
+'revnCoupon',
+code
+);
+
+renderCart();
+
+}
