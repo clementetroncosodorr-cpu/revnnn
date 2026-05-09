@@ -139,3 +139,64 @@ border:1px solid #333;
 margin-bottom:10px;
 
 }
+#topBtn{
+
+position:fixed;
+bottom:20px;
+left:20px;
+
+width:55px;
+height:55px;
+
+border-radius:50%;
+
+background:black;
+color:white;
+
+border:1px solid white;
+
+z-index:999;
+
+cursor:pointer;
+
+}
+
+#backBtn{
+
+position:absolute;
+top:20px;
+left:20px;
+
+width:45px;
+height:45px;
+
+border-radius:50%;
+
+background:black;
+color:white;
+
+border:1px solid white;
+
+cursor:pointer;
+
+}
+
+.coupon-box{
+
+margin:20px 0;
+
+}
+
+.coupon-box input{
+
+width:100%;
+padding:14px;
+
+background:black;
+color:white;
+
+border:1px solid #333;
+
+margin-bottom:10px;
+
+}
